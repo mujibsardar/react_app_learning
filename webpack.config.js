@@ -3,7 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // Constant with our paths
 const paths = {
-  DIST: path.resolve(__dirname, 'dist'),
+  DIST: path.resolve(__dirname, 'src'),
   SRC: path.resolve(__dirname, 'src'), // source folder path ->
   JS: path.resolve(__dirname, 'src'),
 };
@@ -12,7 +12,7 @@ module.exports = {
   entry: path.join(paths.JS, 'index.js'),
   output: {
     path: paths.DIST,
-    filename: 'app.bundle.js',
+    filename: 'bundle.js',
   },
   plugins: [
     new HtmlWebpackPlugin({
