@@ -13,19 +13,13 @@
 
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { HashRouter as Router, Route, Switch, Link } from 'react-router-dom';
+
 import store from './store';
 import Root from './components/Root';
 import Home from './components/Home';
 
-export default class Hello extends Component {
-  render() {
-    return (
-      <div>
-        Hello from react es6
-      </div>
-    );
-  }
-}
 
 render(
   <Provider store={store}>
@@ -33,6 +27,7 @@ render(
               <div className="container">
               <Switch>
                     <Route exact path="/" component={Home} />
+                    <Route component={Root} />
               </Switch>
               </div>
     </Router>
