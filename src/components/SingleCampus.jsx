@@ -20,7 +20,7 @@ export default class SingleCampus extends Component{
             axios.get(`/api/campuses/${campusId}/students`)
         ])
         .then(axios.spread((campus, students) => {
-            campus=campus.data;
+            campus=campus.data[0];
             students=students.data;
             this.setState({ campus, students  });
         }));
@@ -44,7 +44,6 @@ export default class SingleCampus extends Component{
         var students=this.state.students;
         var styles = { cssFloat:'right' };
         var stylesImg={ width:'65px' };
-
         return (
 
             <div key={ campus.id }  className="col-md-9">
@@ -54,11 +53,11 @@ export default class SingleCampus extends Component{
                     </Link></h1>
                 </div>
                 <div className="row">
-                    <div className="col-md-4">
+                    <div className="col-md-6">
                         <img src={ campus.image }/>
                     </div>
 
-                    <div className="col-md-4">
+                    <div className="col-md-6">
                         <ul>
                             <li>{ campus.name } Fact #1</li>
                             <li>{ campus.name } Fact #2</li>

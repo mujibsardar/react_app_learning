@@ -65,13 +65,14 @@ export default class Campus extends Component{
                         campuses.map(campuses => {
                             return (
 
-                                <div className="col-sm-6 col-md-4" key={campuses.id}>
+                                <div className="col-sm-12 col-md-12 col-lg-6" key={campuses.id}>
                                     <div className="thumbnail">
                                         <Link to={`/campuses/view/${campuses.id}`}><img src={campuses.image} /></Link>
                                         <div className="caption">
                                             <h4>Campus <Link to={`/campuses/view/${campuses.id}`}>{ campuses.name } #{campuses.id}</Link></h4>
                                             <p>{campuses.students.length} Students</p>
-                                            <p><Link to={`/campuses/view/${campuses.id}`}><button type="button" className="btn btn-default">View</button></Link> <button type="button" className="btn btn-primary" onClick={this.handleClick} id={campuses.id}>Delete</button>
+                                            <p><Link to={`/campuses/view/${campuses.id}`}><button type="button" className="btn btn-default">View</button>
+                                            </Link> <button type="button" className="btn btn-primary" onClick={this.handleClick} id={campuses.id}>Delete</button>
                                             </p>
                                         </div>
                                     </div>

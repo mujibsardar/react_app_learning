@@ -19,6 +19,7 @@ export default class NewCampus extends Component{
             axios.get(`/api/campuses/${campusId}`)
             .then(res => res.data)
             .then(campus => {
+                campus = campus[0];
                 this.setState({ campus });
             });
         }
@@ -48,14 +49,12 @@ export default class NewCampus extends Component{
         // editing existing campus
         else{
             let campusId=this.state.campus.id;
-
             // handle for blanks
             campusName=(campusName==='')?this.state.campus.name:campusName;
             campusImage=(campusImage==='')?this.state.campus.image:campusImage;
-
             axios({
                 method: 'put',
-                url: '/api/campuses/edit/'+campusId,
+                url: '/api/campuses/edit/' + campusId,
                 data: {
                     name: campusName,
                     image: campusImage
@@ -65,7 +64,6 @@ export default class NewCampus extends Component{
                 this.props.history.push('/campuses/view/'+campusId);
             });
         }
-
     }
 
     render() {

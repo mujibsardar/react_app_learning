@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom'
 
 export default class NewStudent extends Component{
     constructor (props){
@@ -30,14 +31,6 @@ export default class NewStudent extends Component{
                 student=student.data[0];
                 this.setState({ campuses, student  });
             }));
-
-
-            // axios.get(`/api/students/${studentId}`)
-            // .then(res => res.data)
-            // .then(student => {
-            //     this.setState({ student: student[0] });
-            // });
-
         }
         else{
             axios.get('/api/campuses')
@@ -86,19 +79,22 @@ export default class NewStudent extends Component{
 
         // creating new student
         if(this.formNew) {
-            axios({
-                method: 'post',
-                url: '/api/students/new',
-                data: {
-                    firstName: studentFirst,
-                    lastName: studentLast,
-                    email: studentEmail,
-                    image: studentImage,
-                    campusId: studentCampus
-                }
+          let old_this = this;
+          axios.post('/api/students/new', {
+            firstName: studentFirst,
+            lastName: studentLast,
+            email: studentEmail,
+            image: studentImage,
+            campusId: studentCampus
             })
-            .then(res => {
-                this.props.history.push('/students');
+            .then(function (response) {
+              console.log(response);
+              alert("Add Status: " + response.data);
+              console.log(old_this);
+              old_this.props.history.push('/students');
+            })
+            .catch(function (error) {
+              console.log(error);
             });
         }
         // editing existing student

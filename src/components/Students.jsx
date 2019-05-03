@@ -16,20 +16,13 @@ export default class Student extends Component{
     }
 
     handleClick(e){
-        console.log("clickTarg",e.target.id);
+        let old_this = this;
         axios({
             method: 'delete',
             url: '/api/students/'+e.target.id
         })
-        .then(res =>{
-            console.log('change state',res);
-            //cannot push to the same path must modify state
-            // this.props.history.push('/campuses');
-            // this.setState({ campuses });
-
-
-            // could not do another query on the server side
-            // please see api
+        .then(res => {
+            alert("Delete Success");
             axios.get('/api/students')
             .then(res => res.data)
             .then(students => this.setState({ students }));
@@ -42,7 +35,6 @@ export default class Student extends Component{
         var stylesImg={ width:'65px' };
 
         return (
-
             <div className="col-md-9">
                 <h1>Students</h1>
                 <h2>List of All Students ({students.length})

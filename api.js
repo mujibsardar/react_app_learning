@@ -17,7 +17,6 @@ api.get('/hello', function (req, res) {
 api.get('/students', (req, res, next) => {
     Students.findAll({ include: [ Campuses ], order: [["firstName" , "ASC"]] })
     .then(function(students) {
-        // console.log(JSON.stringify(students));
         res.json(students);
     })
     .catch(next);
@@ -71,46 +70,30 @@ api.put('/students/edit/:studentId', (req, res, next) => {
 
     if(!Number(studentId)){res.sendStatus(500);}
     else{
-        Students.findById(studentId)
-        .then(function (data) {
-            if(data){
-                data.update({
-                    firstName: studentFirst,
-                    lastName: studentLast,
-                    email: studentEmail,
-                    image: studentImage,
-                    campusId: studentCampus
-                })
-                .then(function() {
-                    res.send(data);
-                });
-            }
-            else{
-                res.sendStatus(404);
-            }
-        });
+      Students.update(
+       {firstName: studentFirst,
+       lastName: studentLast,
+       email: studentEmail,
+       image: studentImage,
+       campusId: studentCampus},
+       {where: {id:studentId}}
+     ).then(function (data) {
+       res.send(data);
+     });
     }
 });
 
 // DELETE STUDENT
 api.delete('/students/:studentId', (req, res, next) => {
     var studentId=req.params.studentId;
-
     if(!Number(studentId)){res.sendStatus(500)}
     else {
-        Students.findById(studentId)
-        .then(function (data) {
-            if (data) {
-                res.status(204);
-                data.destroy({force: true})
-                .then(function (data) {
-                    res.send(data);
-                });
-            }
-            else {
-                res.sendStatus(404);
-            }
-        });
+      Students.destroy({
+        where: { id: studentId }
+      })
+      .then(student_obj => {
+        res.json(student_obj);
+      });
     }
 });
 
@@ -161,12 +144,10 @@ api.get('/campuses/:campusId/students', (req, res, next) => {
 
 // ADD CAMPUS
 api.post('/campuses/new', (req, res, next) => {
-    console.log('HELLO',req.body);
     var campusName=req.body.name;
     var campusImage=req.body.image;
     Campuses.create({name:campusName,image:campusImage})
     .then(function (data) {
-        console.log("DATA",data);
         res.status(201);
         res.send(data);
     })
@@ -176,31 +157,23 @@ api.post('/campuses/new', (req, res, next) => {
 
 // EDIT CAMPUS
 api.put('/campuses/edit/:campusId', (req, res, next) => {
-    console.log('HELLO',req.body,req.params.campusId);
-
     var campusId=req.params.campusId;
     var campusName=req.body.name;
     var campusImage=req.body.image;
 
     if(!Number(campusId)){res.sendStatus(500);}
     else{
-        Campuses.findById(campusId)
-        .then(function (data) {
-            if(data){
-                data.update({
-                    name: campusName,
-                    image: campusImage
-                })
-                .then(function() {
-                    res.send(data);
-                });
-            }
-            else{
-                res.sendStatus(404);
-            }
-        });
-    }
 
+      Campuses.update(
+       { name: campusName,
+        image: campusImage},
+       {where: {id:campusId}}
+      ).then(function (data) {
+       res.send(data);
+      });
+
+
+    }
 });
 
 // DELETE CAMPUS
@@ -208,19 +181,13 @@ api.delete('/campuses/:campusId', (req, res, next) => {
     var campusId=req.params.campusId;
     if(!Number(campusId)){res.sendStatus(500)}
     else {
-        Campuses.findById(campusId)
-        .then(function (data) {
-            if (data) {
-                res.status(204);
-                data.destroy({force: true})
-                .then(function (data) {
-                    res.send(data);
-                });
-            }
-            else {
-                res.sendStatus(404);
-            }
-        });
+      Campuses.destroy({
+        where: { id: campusId }
+      })
+      .then(campus_obj => {
+        console.log(`Deleted: ${campus_obj}`);
+        res.json(campus_obj);
+      });
     }
 });
 

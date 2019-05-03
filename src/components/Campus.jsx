@@ -33,7 +33,7 @@ export default class Campus extends Component{
                     method: 'delete',
                     url: '/api/campuses/'+campusId
                 })
-                .then(res =>{
+                .then(res => {
                     axios.get('/api/campuses')
                         .then(res => res.data)
                         .then(campuses => this.setState({ campuses }));
