@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './../css/main.css';
 
 export default class SingleCampus extends Component{
     constructor(){
@@ -54,7 +55,7 @@ export default class SingleCampus extends Component{
                 </div>
                 <div className="row">
                     <div className="col-md-6">
-                        <img src={ campus.image }/>
+                        <img className="bootstrap_img" src={ campus.image }/>
                     </div>
 
                     <div className="col-md-6">

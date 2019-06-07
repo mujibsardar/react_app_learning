@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './../css/main.css';
 
 export default class Campus extends Component{
     constructor(){
@@ -67,7 +68,7 @@ export default class Campus extends Component{
 
                                 <div className="col-sm-12 col-md-12 col-lg-6" key={campuses.id}>
                                     <div className="thumbnail">
-                                        <Link to={`/campuses/view/${campuses.id}`}><img src={campuses.image} /></Link>
+                                        <Link to={`/campuses/view/${campuses.id}`}><img className="campus_thumbnail" src={campuses.image} /></Link>
                                         <div className="caption">
                                             <h4>Campus <Link to={`/campuses/view/${campuses.id}`}>{ campuses.name } #{campuses.id}</Link></h4>
                                             <p>{campuses.students.length} Students</p>

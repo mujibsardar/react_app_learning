@@ -37,7 +37,7 @@ export default class SingleStudent extends Component{
 
                                 <div className="row">
                                     <div className="col-md-4">
-                                        <img src={ student.image } />
+                                        <img className="bootstrap_img" src={ student.image } />
                                     </div>
 
                                     <div className="col-md-4">
