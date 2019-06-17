@@ -1,5 +1,26 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+
+## Git
+
+Delete .git and initialize and setup your own repo
+
+## npm build
+
+Delete node_module and package-lock.json then run 'npm install'
+
+## Seed Database
+
+Make sure you have postgres installed. Seed the database by running 'node seed.js'
+
+## Run The App
+
+Run node 'server.js'  
+
+
+## ----------- Start of Default React Readme ------------------   
+
 ## Available Scripts
 
 In the project directory, you can run:
