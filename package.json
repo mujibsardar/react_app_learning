@@ -20,7 +20,11 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "sequelize": "^5.8.2",
-    "ssri": "^6.0.2"
+    "ssri": "^6.0.2",
+    "immer": "^8.0.1",
+    "sockjs": "^0.3.20",
+    "node-notifier": "^8.0.1",
+    "react-dev-utils": "^11.0.4"
   },
   "scripts": {
     "start": "react-scripts start",
